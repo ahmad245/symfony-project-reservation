@@ -1,0 +1,95 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}admin edit ad
+{% endblock %}
+{% form_theme form '/ad/_shared.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
+				<div class="card bg-light">
+					<div class="card-header">
+						<h4 class="card-title">edit ad from admin</h4>
+					</div>
+					<div class="card-body">
+						{{form_start(form)}}
+						{{form_widget(form)}}
+						<button name="" type="submit" id="" class="btn btn-primary" href="#" role="button">edit</button>
+						{{form_end(form)}}
+					</div>
+				</div>
+
+			</div>
+			<div class="col-6">
+              <div class="card bg-light">
+					<div class="card-header">
+						<h4 class="card-title">reservation</h4>
+					</div>
+					<div class="card-body">
+						<table class="table">
+                         <thead>
+                           <tr>
+                             <th>Id</th>
+                             <th>booker</th>
+                             <th>reservation date</th>
+                           </tr>
+                         </thead>
+                         <tbody>
+                         {% for book in ad.bookings %}
+                              <tr>
+                              <td>{{book.id}}</td>
+                              <td>{{book.user.fullName}}</td>
+                              <td>{{book.dateCreate | date}}</td>
+                              <td> <a href="#" class="btn btn-primary"> <i class="fas fa-pen"></i> </a> </td>
+                          </tr>
+                         {% endfor %}
+                         
+                         </tbody>
+                        </table>
+					</div>
+
+                    
+				</div>
+          
+              <div class="card bg-light mt-5">
+					<div class="card-header">
+						<h4 class="card-title">Comments</h4>
+					</div>
+					<div class="card-body">
+						<table class="table">
+                         <thead>
+                           <tr>
+                             <th>Id</th>
+                             <th>Commenter</th>
+                             <th>Message</th>
+                             <th>Rating</th>
+                           </tr>
+                         </thead>
+                         <tbody>
+                         {% for comment in ad.comments %}
+                              <tr>
+                              <td>{{comment.id}}</td>
+                              <td>{{comment.user.fullName}}</td>
+                              <td>{{comment.content}}</td>
+                              <td>{{comment.rating}}</td>
+                              <td> <a href="#" class="btn btn-primary"> <i class="fas fa-pen"></i> </a> </td>
+                          </tr>
+                         {% endfor %}
+                         
+                         </tbody>
+                        </table>
+					</div>
+
+                    
+				</div>
+            </div>
+              </div>
+		</div>
+	</div>
+
+
+{% endblock %}
+{% block javascripts %}
+	<script src="/js/ad/form-edit.js"></script>
+{% endblock %}

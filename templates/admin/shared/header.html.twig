@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<a class="navbar-brand" href="#">Navbar</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarColor01">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#"><i class="fas fa-chart-line"></i> Dashboard
+					<span class="sr-only">(current)</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{path('admin-ads-index')}}"><i class="fas fa-hotel"></i>Ads</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#"><i class="fas fa-folder"></i>Reservations</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#"><i class="fas fa-comments"></i>Comments</a>
+			</li>
+            	<li class="nav-item">
+				<a class="nav-link" href="#"><i class="fas fa-users"></i>Users</a>
+			</li>
+		</ul>
+		<ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+                   <a class="dropdown-item" target="_blank" href="{{path('homePage')}}"><i class="fas fa-eye"></i> home !</a>
+                  </li>
+			{% if app.user %}
+				<div class="dropdown">
+                 
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{{app.user.username}}
+					</button>
+
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+						
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="{{path('admin_account_logout')}}">logout !</a>
+					</div>
+				</div>
+
+			
+			{% endif %}
+
+
+		</ul>
+
+	</div>
+</nav>

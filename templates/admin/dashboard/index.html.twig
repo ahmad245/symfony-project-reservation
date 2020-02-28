@@ -1,0 +1,114 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello AdminDashboardController!
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
+				<div class="card bg-primary text-white text-center my-3">
+					<div calss="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                         <i class="fas fa-users fa-3x"></i>
+                        </div>
+                        <div class="col-8">
+                          <h4 class="card-title"> {{stats.users}} users registers </h4>
+                        </div>
+                      </div>
+                    </div>
+				</div>
+			</div>
+			<div class="col">
+              	<div class="card bg-dark text-white text-center my-3">
+					<div calss="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                         <i class="fas fa-hotel fa-3x"></i>
+                        </div>
+                        <div class="col-8">
+                          <h4 class="card-title"> {{stats.ads}} annotations are posted </h4>
+                        </div>
+                      </div>
+                    </div>
+				</div>
+            </div>
+			<div class="col">
+              	<div class="card bg-warning text-white text-center my-3">
+					<div calss="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                         <i class="fas fa-folder fa-3x"></i>
+                        </div>
+                        <div class="col-8">
+                          <h4 class="card-title"> {{stats.reservations}} reservation </h4>
+                        </div>
+                      </div>
+                    </div>
+				</div>
+            </div>
+			<div class="col">
+              	<div class="card bg-success text-white text-center my-3">
+					<div calss="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                         <i class="fas fa-comments fa-3x"></i>
+                        </div>
+                        <div class="col-8">
+                          <h4 class="card-title"> {{stats.comments}} comments </h4>
+                        </div>
+                      </div>
+                    </div>
+				</div>
+            </div>
+		</div>
+        <div class="row">
+          <div class="col">
+           <div class="alert alert-success">
+             <h2 class="alert-heading"> <i class="fas fa-arrow-up"></i> The best Annotations</h2>
+             <table class="table table-hover table-responsive">
+              <thead>
+                 <tr>
+                  <th>Annotations</th>
+                  <th>Users</th>
+                  <th>Avg Rating</th>
+                 </tr>
+              </thead>
+              <tbody>
+               {% for ad in bestAds %}
+                   <tr>
+                    <td>{{ad.title}}</td>
+                    <td>{{ad.firstName}} {{ad.lastName}}</td>
+                    <td class="text-center"> <span class="badge badge-dark "> {{ad.note | number_format(1)}} </span></td>
+                   </tr>
+               {% endfor %}
+              </tbody>
+             </table>
+           </div>
+          </div>
+          <div class="col">
+               <div class="alert alert-warning">
+             <h2 class="alert-heading"> <i class="fas fa-arrow-down"></i> The best Annotations</h2>
+             <table class="table table-hover table-responsive">
+              <thead>
+                 <tr>
+                  <th>Annotations</th>
+                  <th>Users</th>
+                  <th>Avg Rating</th>
+                 </tr>
+              </thead>
+              <tbody>
+               {% for ad in worstAds %}
+                   <tr>
+                    <td>{{ad.title}}</td>
+                    <td>{{ad.firstName}} {{ad.lastName}}</td>
+                    <td class="text-center"> <span class="badge badge-dark "> {{ad.note | number_format(1)}} </span></td>
+                   </tr>
+               {% endfor %}
+              </tbody>
+             </table>
+           </div>
+          </div>
+        </div>
+	{% endblock %}

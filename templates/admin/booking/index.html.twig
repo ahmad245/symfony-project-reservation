@@ -1,0 +1,47 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello AdminAd{% endblock %}
+
+{% block body %}
+
+ <div class="container-fluid">
+ {% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endfor %}
+  <h1 class="my-5">Admin Ads </h1>
+
+  <table class="table table-hover responsive ">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Booker</th>
+        <th>Annontaion</th>
+      </tr>
+    </thead>
+
+    <tbody>
+     {% for book in books %}
+         
+    
+      <tr>
+       <td>{{book.id}}</td>
+       <td>{{book.dateCreate | date}}</td>
+       <td>{{book.user.fullName}}</td>
+      
+       <td>{{book.ad.title}}</td>
+       <td>
+        <a href="{{path('admin_comment_edit',{'id':comment.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i> </a>
+        <a href="{{path('admin_comment_delete',{'id':comment.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i> </a>
+       </td>
+      </tr>
+       {% endfor %}
+    </tbody>
+
+  </table>
+ </div>
+{% endblock %}

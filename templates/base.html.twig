@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://kit.fontawesome.com/9b5570c32d.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="/css/app.css"></link>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% include "shared/header.html.twig" %}
+
+        {% block header %}{% endblock %}
+
+        {% block body %}{% endblock %}
+
+        {% include "shared/footer.html.twig" %}
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

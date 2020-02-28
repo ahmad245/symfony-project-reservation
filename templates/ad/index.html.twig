@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdController!{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+   {% for ad in ads %}
+  	{% include "shared/_ad.html.twig" %}
+
+      {% endfor %}       
+
+  </div>
+</div>
+
+	{% block javascript %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  let like=document.querySelectorAll('a.js-like');
+  function handelEvent(event){
+       event.preventDefault();
+       const url=this.href;
+       const spanCount=this.querySelector('span.js-like');
+       const icon=this.querySelector('i');
+       axios.get(url).then((res)=>{
+         spanCount.textContent=res.data.likes;
+         if(icon.classList.contains('fas')){
+           icon.classList.replace('fas','far')
+         }
+         else{
+           icon.classList.replace('far','fas')
+         }
+       }).catch(err=>{
+         
+       })
+  }
+
+
+  like.forEach(e=>{
+    e.addEventListener('click',handelEvent)
+  })
+ 
+</script>
+	
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% set url=path('ad-show',{slug:ad.slug}) %}
+<div class="col-md-4">
+	<div class="card bg-light mb-3">
+		<div class="card-header text-center">
+			<strong>{{ad.price}}</strong><br>
+			{% if ad.comments | length > 0 %}
+			<small>  {% include "shared/_rating.html.twig" with {'rating':ad.getAvgRating()} %} </small>
+			{% else %}
+				<small>dont commit yet</small>
+			{% endif %}
+			
+			
+          
+		</div>
+		<img src="http://placehold.it/400x200" alt="">
+		<div class="card-body">
+			<h4 class="card-title">{{ad.title}}</h4>
+			<p class="card-text">
+				{{ad.description}}
+			</p>
+			<a class="btn btn-primary " href="{{ url }}" role="button">Learn more</a>
+{#  #}
+			<a href="{{path('ad_like',{'id':ad.id})}}" class="btn btn-link js-like" >
+			{% if app.user and ad.isLikedByUser(app.user) %}
+			 
+			 <i class="fas fa-thumbs-up"></i>
+			 {% else %}
+				  <i class="far fa-thumbs-up"></i>
+			{% endif %}
+			
+			 <span class="js-like">{{ad.likes | length}}</span>
+			 <span class="js-label"> like</span>
+			</a>
+			{% if app.user and  app.user is same as(ad.author) %}
+				<a href="{{path('ad-edit',{'slug':ad.slug})}}" class="btn btn-secondary">Edit</a>
+				 <a href="{{path('ad-delete',{'slug':ad.slug})}}" class="btn btn-danger">delete</a>
+			{% endif %}
+
+		</div>
+	</div>
+
+</div>
+
+
+

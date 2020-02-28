@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} BookingController!{{ad.title}}{% endblock %}
+ 
+{% block body %}
+<div>
+  {{success}}
+ </div>
+<div class="container">
+{{form_start(form)}}
+{{form_widget(form)}}
+<button type="submit" class="btn btn-primary">save</button>
+{{form_end(form)}}
+</div>
+
+{% endblock %}
+{% block javascripts %}
+<script src="/js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+ let h="sdf";
+ console.log(h);
+  $("#booking_startDate").datepicker({
+        dateFormat : 'yy-mm-dd'
+        });
+})
+
+</script>
+{% endblock %}

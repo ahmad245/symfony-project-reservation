@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	BookingController!{{booking.ad.title}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+        <h1>your reservation with n({{booking.id}})</h1>
+        {% if app.request.query.get('withAlert') %}
+          <div calss="alert alert-success">
+             <h4 class="alert-heading">Bravo !</div>
+             <p>your Reservation Success
+               <strong>
+                <a href="{{path("user_show",{'slug':booking.ad.author.slug})}}">{{booking.ad.author.fullName}} </a>
+               </strong>
+             </p>
+          </div>
+        {% endif %}
+        
+		<div class="alert alert-light">
+
+			<div class="row ">
+				<div class="col-12">
+					{{booking.ad.title}}
+				</div>
+				<div class="col-12">
+					{{booking.user.fullName}}
+				</div>
+				<div class="col-12">
+					{{booking.amount}} &euro;
+				</div>
+				<div class="col-12">
+					{{booking.startDate |date}}
+				</div>
+				<div class="col-12">
+					{{booking.startDate |date('d/m/y')}}
+				</div>
+				<div class="col-12">
+					{{booking.endDate |date('d/m/y')}}
+				</div>
+			</div>
+		</div>
+		<div class="alert alert-light">
+		  <h2 class="alert-heading">your opinion matters</h2>
+		   
+		   
+		  {% if date() > date(booking.endDate) %}
+		  {% set comment = booking.ad.getCommentForUser(app.user) %}
+		   {% if comment is not null%}
+		         <blockqoute>{{comment.content}}</blockqoute>
+		         {% include "shared/_rating.html.twig" with {'rating':comment.rating} %}
+		      {% else %}
+				  
+				{{form_start(form)}}
+				{{form_widget(form)}}
+				<button name="" type="submit" id="" class="btn btn-primary" href="#" role="button">save</button>
+			   {{form_end(form)}}
+			 {% endif %}
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

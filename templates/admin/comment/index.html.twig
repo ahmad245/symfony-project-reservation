@@ -1,0 +1,51 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello AdminAd{% endblock %}
+
+{% block body %}
+
+ <div class="container-fluid">
+ {% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endfor %}
+  <h1 class="my-5">Admin Ads </h1>
+
+  <table class="table table-hover responsive ">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Author</th>
+        <th>Comments</th>
+        <th>Rate</th>
+        <th>annotation</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+     {% for comment in comments %}
+         
+    
+      <tr>
+       <td>{{comment.id}}</td>
+       <td>{{comment.createdAt | date}}</td>
+       <td>{{comment.user.fullName}}</td>
+       <td>{{comment.content}}</td>
+       <td><span class="badge badge-primary rounded">{{comment.rating | number_format(1)}}</span> </td>
+       <td>{{comment.ad.title}}</td>
+       <td>
+        <a href="{{path('admin_comment_edit',{'id':comment.id})}}" class="btn btn-primary"><i class="fas fa-edit"></i> </a>
+        <a href="{{path('admin_comment_delete',{'id':comment.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i> </a>
+       </td>
+      </tr>
+       {% endfor %}
+    </tbody>
+
+  </table>
+ </div>
+{% endblock %}

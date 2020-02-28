@@ -1,0 +1,24 @@
+  <nav aria-label="Page navigation example">
+  <ul class="pagination pagination-circle pg-blue">
+    <li class="page-item {% if page==1 %} disabled {% endif %}"><a  href="{{path(route,{'page': 1})}}" class="page-link">First</a></li>
+    <li class="page-item {% if page==1 %} disabled {% endif %}  ">
+      <a class="page-link"  href="{{path(route,{'page':page - 1})}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    {% for i in 1..pages %}
+     
+      
+    <li class="page-item   {% if page==i %}active{% endif %} "><a href="{{path(route,{'page':i})}}" class="page-link">{{i}}</a></li>
+    {% endfor %}
+    
+    <li class="page-item">
+      <a class="page-link  {% if page==pages %} disabled {% endif %}"   href="{{path(route,{'page':page + 1})}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    <li class="page-item  {% if page==pages %} disabled {% endif %} "><a href="{{path(route,{'page':pages})}}" class="page-link">Last</a></li>
+  </ul>
+</nav>

@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+{% block title %}show ad by slug
+{% endblock %}
+{% block body %}
+
+	<div class="show-header" style="background-image:url({{ad.coverImage}});hight=15rem">
+		<h1>{{ad.title}}</h1>
+		<p>{{ad.description}}</p>
+		<p>{{ad.price}}</p>
+		<p>{{ad.solid}}</p>
+		<div class="reserve">
+			{% if app.user %}
+				<a href="{{path('booking_index',{'slug':ad.slug})}}" class="btn btn-primary">Reserve</a>
+			{% endif %}
+
+
+			{% if app.user and  app.user is same as(ad.author) %}
+				<a href="{{path('ad-edit',{'slug':ad.slug})}}" class="btn btn-secondary">Edit</a>
+				<a href="{{path('ad-delete',{'slug':ad.slug})}}" class="btn btn-danger">delete</a>
+			{% endif %}
+
+
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				{{ad.content}}
+			</div>
+			<div class="col-md-4">
+				<a href="{{path('user_show',{'slug':ad.author.slug})}}">
+					<h3>
+						{{ad.author.fullName}}
+					</h3>
+				</a>
+				<p>
+					{{ad.author.bio}}
+				</p>
+				<p>{{ad.author.ads |length}}</p>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<h2>comments</h2>
+			</div>
+			{% if ad.comments | length > 0 %}
+       <div class="alert alert-info">
+          <div class="alert-heading">
+          <div class="row">
+            <div class="col">
+              Note Global <small>this average calculate by {{ad.comments | length}}
+            </div>
+            <div class="col">
+               {% include "shared/_rating.html.twig" with {'rating':ad.getAvgRating()} %}
+            </div>
+            </div>
+          </div>
+       </div>
+				{% for comment in ad.comments %}
+         {# {% set rating = comment.rating %}  #}
+					<div class="col-md-8 bg-light rounded my-3">
+          
+					 <p>	{{comment.content}}</p>
+						<p>{{comment.user.fullName}}</p>
+					
+           {% include "shared/_rating.html.twig" with {'rating':comment.rating} %}
+					</div>
+
+				{% endfor %}
+			{% endif %}
+
+
+		</div>
+
+	</div>
+
+{% endblock %}

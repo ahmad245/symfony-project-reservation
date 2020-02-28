@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title %} My Booking {% endblock %}
+{% block body %}
+ <div class="container">
+ <div class="alert alert-info">
+    
+      {% for booking in app.user.bookings %}
+      <div class="row">
+          <div class="col-md-3"> <img src="{{booking.ad.coverImage}}" class="img-fluid"> 
+            <div class="mt-3">
+              {% set comment = booking.ad.getCommentForUser(app.user) %}
+                {% if comment is not null %}
+                  {% include "shared/_rating.html.twig" with {'rating':comment.rating} %}
+                  {% else %}
+                    <p>you do not yes commet</p>
+                {% endif %}
+                
+            </div>
+          </div>
+          <div class="col-md-3"> {{booking.ad.title}} </div>
+          <div class="col-md-2"> {{booking.startDate |date('d/m/y')}} </div>
+          <div class="col-md-2"> {{booking.endDate |date('d/m/y')}} </div>
+          <div class="col-md-1"> {{booking.amount |date('d/m/y')}} </div>
+          <div class="col-md-1"> <a href="{{path('booking_show',{'id':booking.id})}}">More Info</a> </div>
+          </div>
+      {% endfor %}
+    
+    </div>
+ </div>
+{% endblock %}

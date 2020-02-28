@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}page for
+	{{user.fullName}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row align-items-center ">
+			<div class="col-3 text-center">
+     
+				<img src="{{user.picture}}" alert="picture for {{user.fullName}}">
+        
+				<div>
+					<span class="badge badge-primary">{{user.ads |length}}
+						annotation</span>
+				</div>
+			</div>
+
+			<div class="col-9">
+				<h1 class="h1">{{user.fullName}}</h1>
+				{% if user is same as(app.user) %}
+				  <div class="mt-3">
+				    <a href="{{path('account_profile')}}" class="btn btn-primary mr-2 mb-2">My Profile</a>
+				    <a href="{{path('password-update')}}" class="btn btn-primary mr-2 mb-2">update password</a>
+				  </div>
+				{% endif %}
+				
+			</div>
+		</div>
+		{{user.bio |raw}}
+		<div class="user-annotiation">
+			<div class="row">
+				{% if user.ads | length >0 %}
+					{% for ad in user.ads %}
+					{% include "shared/_ad.html.twig" %}
+					{% endfor %}
+
+				{% else %}
+					<div class="alert alert-warning">
+						<strong>{{user.fullName}}</strong>
+						have not yet annotation
+					</div>
+				{% endif %}
+
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
