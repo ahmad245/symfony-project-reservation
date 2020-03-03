@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Commande !{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+       <div class="field" style="margin-top: 0">
+         <select id="anne" >
+         
+         <option value=""> </option>
+          {% for sAnne in 2000.."now"|date('Y') %}
+              <option value="{{sAnne}}" >
+              {{sAnne}}
+              
+               </option>
+          {% endfor %}
+         </select>
+       </div>
+
+  </div>
+   <div class="row">
+       <div class="field" style="margin-top: 0">
+         <select id="moi" >
+         
+         <option value=""> </option>
+          {% for sMoi in 1..12 %}
+              <option value="{{sMoi}}" >
+              {{ date("2017-" ~ "%02d"|format(nbMoi) ~ "-01")|localizeddate("medium", "none", null, null, "MMMM")|capitalize }}
+              
+               </option>
+          {% endfor %}
+         </select>
+       </div>
+
+  </div>
+</div>
+
+	{% block javascript %}
+{# <script src="https://unpkg.com/axios/dist/axios.min.js"></script> #}
+<script>
+
+ let select=document.getElementById('anne');
+
+  function handelAnne(event){
+     
+       let anneValue=document.getElementById('anne').value;
+       let route = "{{ path('commande_index', {anne:'anneValue'})|escape('js') }}";
+          route=route.replace("anneValue",anneValue)
+      location.href=route;
+    
+      
+ }
+ select.addEventListener('change',handelAnne);
+
+</script>
+{# <script>
+  let like=document.querySelectorAll('a.js-like');
+  function handelEvent(event){
+       event.preventDefault();
+       const url=this.href;
+       const spanCount=this.querySelector('span.js-like');
+       const icon=this.querySelector('i');
+       axios.get(url).then((res)=>{
+         spanCount.textContent=res.data.likes;
+         if(icon.classList.contains('fas')){
+           icon.classList.replace('fas','far')
+         }
+         else{
+           icon.classList.replace('far','fas')
+         }
+       }).catch(err=>{
+         
+       })
+  }
+
+
+  like.forEach(e=>{
+    e.addEventListener('click',handelEvent)
+  })
+ 
+</script> #}
+	
+{% endblock %}
+{% endblock %}
+
