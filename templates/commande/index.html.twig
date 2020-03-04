@@ -26,7 +26,7 @@
          <option value=""> </option>
           {% for sMoi in 1..12 %}
               <option value="{{sMoi}}" >
-              {{ date("2017-" ~ "%02d"|format(nbMoi) ~ "-01")|localizeddate("medium", "none", null, null, "MMMM")|capitalize }}
+              {{ sMoi }}
               
                </option>
           {% endfor %}
@@ -34,12 +34,59 @@
        </div>
 
   </div>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="1">date</th>
+          <th colspan="4">houres</th>
+          <th colspan="1">all</th>
+          
+         </tr>
+
+      <thead>
+      <tbody>
+         <tr>
+          <td>dat</td>
+          <td>1 heour</td>
+          <td>2 heour</td>
+          <td>3 heour</td>
+          <td>4 heour</td>
+   
+          <td>All</td>
+         </tr>
+         <tr id="tr1">
+             <td>dqte</td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+         </tr>
+         <tr>
+             <td>dqte</td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+         </tr>
+         <tr>
+             <td>dqte</td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+             <td> <input type="checkbox" > </td>
+         </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 	{% block javascript %}
 {# <script src="https://unpkg.com/axios/dist/axios.min.js"></script> #}
 <script>
 
+   
+     
  let select=document.getElementById('anne');
 
   function handelAnne(event){
@@ -82,5 +129,15 @@
 </script> #}
 	
 {% endblock %}
+  <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+<script>
+
+   var check = $('#tr1').find('input[type=checkbox]:checked').length;
+
+   var n = $("input:checked").length;
+     console.log(n)
+   </script>
 {% endblock %}
 
